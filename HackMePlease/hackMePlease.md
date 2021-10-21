@@ -32,7 +32,7 @@ We have Apache and MySQL.
 <br />
 <br />
 ## Examine Web Server
-We have a default website, inspecting the source code, there is nothing.
+We have a default website, inspect the source code, nothing interesting.
 
 ![](pics/web1.png)
 <br />
@@ -59,6 +59,7 @@ After searching around, It's DMS (Document Management System).
 
 > and a repository: [https://sourceforge.net/p/seeddms/code/ci/5.1.22/tree/](https://sourceforge.net/p/seeddms/code/ci/5.1.22/tree/)
 <br />
+
 Ok, checking the path `http://10.10.10.10/seeddms51x/seedms-5.1.22/` and a login panel appears.
 
 ![](pics/login1.png)

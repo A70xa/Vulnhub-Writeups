@@ -1,8 +1,10 @@
 ### Vulnhub Writeups
-I've been doing Virtual Machines from past 8 months.
+I've been doing Virtual Machines for a while.
 
-These are the writeups for the Machines I've Solved.
+These are the writeups for the Machines i've solved, try to do it yourself before looking at the solutions as you won’t learn anything without trying.
 # Machine
 - [HMS](https://github.com/A70xa/Vulnhub-Writeups/blob/main/HMS/hms.md)
 - [Corrosion](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Corrosion/corrosion.md)
 - [HackMePlease](https://github.com/A70xa/Vulnhub-Writeups/blob/main/HackMePlease/hackMePlease.md)
+- [Hackable2](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Hackable2/hackable2.md)
+- [Hackable3](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Hackable3/hackable3.md)

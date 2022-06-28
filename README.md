@@ -8,3 +8,4 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [HackMePlease](https://github.com/A70xa/Vulnhub-Writeups/blob/main/HackMePlease/hackMePlease.md)
 - [Hackable2](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Hackable2/hackable2.md)
 - [Hackable3](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Hackable3/hackable3.md)
+- [Argog](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Argog/Notes.md)

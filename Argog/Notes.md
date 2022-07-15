@@ -1,7 +1,7 @@
 #  HarryPotter: Aragog - Writeup 
 
 Argog is the first of three HarryPotter VM series from Vulnhub by Mansoor R.<br />
-This series challenge us to find the horcruxes which hidden inside these machines.<br />
+This series challenges us to find the Horcruxes hidden inside these machines.<br />
 Link to the machine: [https://www.vulnhub.com/entry/harrypotter-aragog-102,688/](https://www.vulnhub.com/entry/harrypotter-aragog-102,688/)
 
 <br />
@@ -26,7 +26,7 @@ _____________________________________________________________________________
 
 ## Port scanning
 
-Next, we need to find which ports and services is running.
+Next, we need to find which ports and services are running.
 
 ![](Pics/nmap.png)
 
@@ -36,7 +36,7 @@ We have `SSH` and `HTTP`.
 
 ## Web Server Enumeration
 
-When we visit the web page, we got a nice image. Examin the source code and nothing usefull. 
+When we visit the web page, we got a nice image. Examine the source code and nothing useful. 
 
 ![](Pics/web.png)
 <br />
@@ -57,12 +57,12 @@ It's a wordpress site.
 Lets scan it with wpscan: `wpscan --url http://10.10.10.5/blog/ --api-token=$wpApi -e vp --plugins-detection aggressive`.
 <br />
 
-> PS: Vulnerable plugins scan requires an API token. To obtaine one, register in [https://wpscan.com/](https://wpscan.com/).
+> PS: Vulnerable plugins scan requires an API token. To obtain one, register at [https://wpscan.com/](https://wpscan.com/).
 
 
 ![](Pics/wp2.png)
 
-We can see, We have a vulnerable plugin `File Manager` that could gives us RCE. Let’s visit the highlighted link.
+We can see, We have a vulnerable plugin `File Manager` that could give us RCE. Let’s visit the highlighted link.
 <br />
 
 ![](Pics/wp3.png)
@@ -74,7 +74,7 @@ Got an error, create a `payload.php` and the script will work.
 
 ![](Pics/wp4.png)
 
-As you see above, there is two `/blog` in the url, remove one and visit the link. 
+As you see above, there are two `/blog` in the URL, remove one and visit the link. 
 
 ![](Pics/wp5.png)
 <br />
@@ -98,14 +98,14 @@ Now, upgrade the shell. [https://infosecwriteups.com/pimp-my-shell-5-ways-to-upg
 ![](Pics/shell2.png)
 <br />
 
-In home directory, there are two users and the first horcrux<strong>(flag)</strong> encoded in base64.
+In home directory, there are two users, and the first horcrux<strong>(flag)</strong> is encoded in base64.
 
 ![](Pics/shell3.png)
 <br />
 
 ## Privilege Escalation
 
-Now, lets try to get more privileges, `linpeas` is a great tool for that. Lets upload it and run it on the target machine. 
+Now, let's try to get more privileges, `linpeas` is a great tool for that. Let's upload it and run it on the target machine. 
 
 ![](Pics/shell4.png)
 <br />
@@ -114,7 +114,7 @@ We have a hidden file.
 
 ![](Pics/shell5.png)
 
-And a database credentials.
+And database credentials.
 
 ![](Pics/shell6.png)
 <br />
@@ -134,7 +134,7 @@ Switch to `hagrid98`, and cat `/.backup.sh`
 ![](Pics/user.png)
 <br />
 
-Looks like `/opt/.backup.sh` is a background script that copies what's in `uploads` to other location. There is a tool called pspy which listens and monitors any events that occur in the system. Lets upload it on the target and run it.
+Looks like `/opt/.backup.sh` is a background script that copies what's in `uploads` to another location. There is a tool called pspy which listens to and monitors any events that occur in the system. Let's upload it on the target and run it.
 
 ![](Pics/pspy.png)
 <br />
@@ -144,7 +144,7 @@ A background job runs by `root`, what if we add a reverse shell in `/.backup.sh`
 ![](Pics/user2.png)
 <br />
 
-Start the listener, and waite.<br />
+Start the listener and waite.<br />
 We're root.
 
 ![](Pics/root.png)

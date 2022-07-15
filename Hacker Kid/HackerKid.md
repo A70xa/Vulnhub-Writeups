@@ -198,7 +198,7 @@ We found a binary that has capability.
 
 > `Linux Capabilities are used to allow binaries (executed by non-root users) to perform privileged operations without providing them all root permissions`.
 
-> Ref: [https://blog.pentesteracademy.com/privilege-escalation-by-abusing-sys-ptrace-linux-capability-f6e6ad2a59cc](https://blog.pentesteracademy.com/privilege-escalation-by-abusing-sys-ptrace-linux-capability-f6e6ad2a59cc)
+> Reference: [https://blog.pentesteracademy.com/privilege-escalation-by-abusing-sys-ptrace-linux-capability-f6e6ad2a59cc](https://blog.pentesteracademy.com/privilege-escalation-by-abusing-sys-ptrace-linux-capability-f6e6ad2a59cc)
 
 Now, Let's follow up, and first, let's download the script
 

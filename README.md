@@ -13,3 +13,4 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [Fawkes](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Fawkes/fawkes.md)
 - [Hacker Kid](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Hacker%20Kid/HackerKid.md)
 - [Dobby](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Dobby/Dobby.md)
+- [Bellatrix](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Bellatrix/Bellatrix.md)

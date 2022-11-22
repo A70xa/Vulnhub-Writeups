@@ -14,3 +14,4 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [Hacker Kid](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Hacker%20Kid/HackerKid.md)
 - [Dobby](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Dobby/Dobby.md)
 - [Bellatrix](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Bellatrix/Bellatrix.md)
+- [Mr-Robot](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Mr-Robot/Mr-Robot.md)

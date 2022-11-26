@@ -16,3 +16,4 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [Bellatrix](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Bellatrix/Bellatrix.md)
 - [Mr-Robot](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Mr-Robot/Mr-Robot.md)
 - [Zico2](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Zico2/Zico2.md)
+- [Brainpan1](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Brainpan1/Brainpan1.md)

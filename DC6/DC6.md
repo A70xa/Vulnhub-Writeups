@@ -132,15 +132,18 @@ That looks interesting, let's give it a try.
 
 ![](Pics/shell3.png)
 <br />
+<br />
 
 Checking `graham` sudo permissions.
 
 ![](Pics/shell4.png)
 <br />
+<br />
 
 Great, we could abuse group permission to write and execute a command as user `jens`.
 
 ![](Pics/shell5.png)
+<br />
 <br />
 
 ## Root Access
@@ -149,10 +152,12 @@ Now, check `jens` sudo permissions.
 
 ![](Pics/shell6.png)
 <br />
+<br />
 
 Heading to GTFObins [https://gtfobins.github.io/gtfobins/nmap/](https://gtfobins.github.io/gtfobins/nmap/)
 
 ![](Pics/shell7.png)
+<br />
 <br />
 
 We could get a root shell by creating a Nmap script file ".nse".<br />

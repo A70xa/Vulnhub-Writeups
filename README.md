@@ -17,4 +17,5 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [Mr-Robot](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Mr-Robot/Mr-Robot.md)
 - [Zico2](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Zico2/Zico2.md)
 - [Brainpan1](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Brainpan1/Brainpan1.md)
-- [DC: 6](https://github.com/A70xa/Vulnhub-Writeups/blob/main/DC6/DC6.md)
+- [DC:6](https://github.com/A70xa/Vulnhub-Writeups/blob/main/DC6/DC6.md)
+- [DC:9](https://github.com/A70xa/Vulnhub-Writeups/blob/main/DC9/DC9.md)

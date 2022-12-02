@@ -67,7 +67,7 @@ Tried a few names and then copied the first user from `Display All Records`, and
 <br />
 <br />
 
-Let's test it for sqli, try: `search=a' or 1=1 -- -`.
+Let's test it for sqli, try: `a' or 1=1 -- -`.
 
 ![](Pics/web5.png)
 <br />

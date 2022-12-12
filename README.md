@@ -20,3 +20,4 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [DC:6](https://github.com/A70xa/Vulnhub-Writeups/blob/main/DC6/DC6.md)
 - [DC:9](https://github.com/A70xa/Vulnhub-Writeups/blob/main/DC9/DC9.md)
 - [Symfonos:1](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Symfonos:1/Symfonos:1.md)
+- [Symfonos:2](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Symfonos:2/Symfonos:2.md)

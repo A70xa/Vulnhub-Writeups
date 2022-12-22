@@ -22,3 +22,4 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [Symfonos:1](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Symfonos:1/Symfonos:1.md)
 - [Symfonos:2](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Symfonos:2/Symfonos:2.md)
 - [Symfonos:3](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Symfonos:3/Symfonos:3.md)
+- [Symfonos:4](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Symfonos:4/Symfonos:4.md)

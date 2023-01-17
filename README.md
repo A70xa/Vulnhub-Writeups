@@ -26,3 +26,4 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [Symfonos:5](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Symfonos:5/Symfonos:5.md)
 - [Digitalworld.local: Mercy](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local:Mercy/Mercy.md)
 - [Digitalworld.local: JOY](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local%20-%20JOY/JOY.md)
+- [Digitalworld.local: SNAKEOIL](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local:SNAKEOIL/SNAKEOIL.md)

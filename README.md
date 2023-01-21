@@ -27,3 +27,5 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [Digitalworld.local: Mercy](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local:Mercy/Mercy.md)
 - [Digitalworld.local: JOY](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local%20-%20JOY/JOY.md)
 - [Digitalworld.local: SNAKEOIL](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local:SNAKEOIL/SNAKEOIL.md)
+- [Digitalworld.local: FALL](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local:FALL/FALL.md)
+- [Digitalworld.local: TORMENT](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local:TORMENT/TORMENT.md)

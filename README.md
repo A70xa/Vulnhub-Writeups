@@ -30,3 +30,4 @@ These are the writeups for the Machines i've solved, try to do it yourself befor
 - [Digitalworld.local: FALL](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local:FALL/FALL.md)
 - [Digitalworld.local: TORMENT](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Digitalworld.local:TORMENT/TORMENT.md)
 - [Breach:1](https://github.com/A70xa/Vulnhub-Writeups/blob/main/Breach:1/breach1.md)
+- [SkyTower](https://github.com/A70xa/Vulnhub-Writeups/blob/main/SkyTower/SkyTower.md)
